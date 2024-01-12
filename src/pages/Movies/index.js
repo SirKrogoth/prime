@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import './movie-info.css';
+import { toast } from 'react-toastify';
 
 function Movies(){
     const { id } = useParams();
@@ -41,12 +42,12 @@ function Movies(){
         const hasMovie = savedMovies.some((savedMovie) => savedMovie.id === movie.id);
 
         if(hasMovie){
-            alert("Este filme já está em sua lista...");
+            toast.warn("Esse filme já está em sua lista.");
             return;
         } else{
             savedMovies.push(movie);
             localStorage.setItem("@primeflix", JSON.stringify(savedMovies));
-            alert("Filme salvo com sucesso...");
+            toast.success("Filme salvo com sucesso!");
         }
     }
 
